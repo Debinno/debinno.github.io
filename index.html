@@ -8,11 +8,14 @@
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <button id="back-to-top" aria-label="Back to top">↑</button>
     <header>
         <nav class="navbar">
-            <a href="index.html" class="active">Home</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="socials.html">Socials</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="socials.html">Socials</a>
+            </div>
         </nav>
     </header>
     <main class="home-content">
@@ -39,9 +42,19 @@
             <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
         </section>
+        <section class="recent-video">
+            <h2>My Latest Video</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UCfbSBBaEf-JBI6F0TqOWpKw" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 Debino. All rights reserved.</p>
     </footer>
+    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌓</button>
+    <button id="back-to-top" aria-label="Back to top">↑</button>
+    <script src="youtube.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
