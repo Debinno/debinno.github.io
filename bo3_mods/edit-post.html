@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post - BO3 Mods Forum</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">BO3 MODS</a>
+            <div class="navbar-links">
+              <a href="index.html">Home</a>
+              <a href="wiki.html">Wiki</a>
+              <a href="forum.html">Forum</a>
+              <a href="profile.html" class="profile-link"">Profile</a>
+              <a href="#" class="login-btn">Login</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <main class="forum-container">
+        <h1>Edit Post</h1>
+        <form id="edit-post-form">
+            <input type="text" id="edit-post-title" required>
+            <div id="post-content-editor"></div>
+            <button type="submit">Save Changes</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 BO3 Mods. All rights reserved.</p>
+    </footer>
+    <script src="forum.js"></script>
+    <script src="discord_auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            if (postId) {
+                loadPostForEditing(postId);
+            }
+        });
+
+        async function loadPostForEditing(postId) {
+            try {
+                const response = await fetch(`https://api.github.com/repos/Debinno/bo3-mods-data/contents/posts/${postId}.json`);
+                const file = await response.json();
+                const content = JSON.parse(decodeURIComponent(escape(atob(file.content))));
+
+                document.getElementById('edit-post-title').value = content.title;
+                quill.root.innerHTML = content.content;
+
+                document.getElementById('edit-post-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const newTitle = document.getElementById('edit-post-title').value;
+                    const newContent = quill.root.innerHTML;
+                    const success = await editForumPost(postId, newTitle, newContent);
+                    if (success) {
+                        alert('Post updated successfully!');
+                        window.location.href = `post.html?id=${postId}`;
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading post for editing:', error);
+                alert('Error loading post for editing. Please try again.');
+            }
+        }
+    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script>
+        var quill = new Quill('#post-content-editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote', 'code-block'],
+                    [{ 'header': 1 }, { 'header': 2 }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                    [{ 'direction': 'rtl' }],
+                    [{ 'size': ['small', false, 'large', 'huge'] }],
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    [{ 'color': [] }, { 'background': [] }],
+                    [{ 'font': [] }],
+                    [{ 'align': [] }],
+                    ['clean']
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

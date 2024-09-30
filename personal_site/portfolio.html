@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>My Socials</title>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <title>Portfolio</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="portfolio.html" >Portfolio</a>
-                <a href="socials.html" class="active">Socials</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="socials.html">Socials</a>
                 <a href="about.html">About</a>
+                <a href="../bo3_mods/index.html">BO3 Mods Forum</a>
             </div>
         </nav>
     </header>
-    <main class="socials-content">
-        <h1>Connect with Me</h1>
-        <div class="social-links">
-            <a href="https://github.com/Debinno" class="social-icon github"></a>
-            <a href="https://x.com/xexdebino" class="social-icon twitter"></a>
-            <a href="https://www.youtube.com/@Debino_" class="social-icon youtube"></a>
-        </div>
+    <main id="portfolio-container">
+        <!-- Portfolio items will be dynamically inserted here -->
     </main>
+
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
     <footer>
         <p>&copy; 2025 Debino. All rights reserved.</p>
     </footer>
     <button id="theme-toggle" aria-label="Toggle dark/light mode">🌓</button>
     <button id="back-to-top" aria-label="Back to top">↑</button>
+    <script src="portfolio.js" defer></script>
     <script src="main.js"></script>
 </body>
 </html>

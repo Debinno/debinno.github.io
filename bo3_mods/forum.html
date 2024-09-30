@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BO3 Mods Forum</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">BO3 MODS</a>
+            <div class="navbar-links">
+              <a href="index.html">Home</a>
+              <a href="wiki.html">Wiki</a>
+              <a href="forum.html" class="active">Forum</a>
+              <a href="profile.html" class="profile-link"">Profile</a>
+              <a href="#" class="login-btn">Login</a>
+            </div>
+          </div>
+        </nav>
+        <nav class="breadcrumb">
+            <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Forum</li>
+            </ol>
+        </nav>
+    </header>
+    <main class="forum-container">
+        <div class="forum-header">
+            <h1>BO3 Mods Forum</h1>
+            <a href="create-post.html" class="new-post-btn">New post</a>
+        </div>
+        <div class="forum-categories">
+            <!-- Categories will be dynamically inserted here -->
+        </div>
+        <div class="forum-search">
+            <input type="text" id="search-input" placeholder="Search forum...">
+            <button id="search-button">Search</button>
+        </div>
+        <div class="forum-posts">
+            <h2>Latest Posts</h2>
+            <div id="latest-posts"></div>
+        </div>
+        <div class="forum-posts">
+            <!-- Posts will be dynamically inserted here -->
+        </div>
+        <aside class="latest-activity">
+            <h3>Latest Activity</h3>
+            <ul id="activity-list"></ul>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2025 BO3 Mods. All rights reserved.</p>
+    </footer>
+    
+    <!-- Edit Post Modal -->
+    <div id="editPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Post</h2>
+            <form id="editPostForm">
+                <input type="hidden" id="editPostId">
+                <input type="text" id="editPostTitle" required>
+                <textarea id="editPostContent" required></textarea>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="forum.js"></script>
+    <script src="discord_auth.js"></script>
+</body>
+</html>

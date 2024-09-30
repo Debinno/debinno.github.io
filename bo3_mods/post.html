@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Post - BO3 Mods</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Copy the header from forum.html -->
+    </header>
+    <main class="post-container">
+        <div id="post-content" class="forum-post">
+            <div class="post-header">
+                <h1 id="post-title"></h1>
+                <div class="post-meta">
+                    <span id="post-author"></span>
+                    <span id="post-date"></span>
+                </div>
+            </div>
+            <div id="post-body" class="post-body"></div>
+        </div>
+        <div id="post-actions" class="post-actions" style="display: none;">
+            <button id="edit-post-btn" onclick="editPost()">Edit</button>
+            <button id="delete-post-btn" onclick="deletePost()">Delete</button>
+        </div>
+        <div id="replies" class="replies"></div>
+        <div id="reply-form" class="reply-form" style="display: none;">
+            <h3>Post a Reply</h3>
+            <textarea id="reply-content" rows="5" placeholder="Write your reply here..."></textarea>
+            <button id="submit-reply">Post Reply</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 BO3 Mods. All rights reserved.</p>
+    </footer>
+    <script src="forum.js"></script>
+    <script src="discord_auth.js"></script>
+    <script>
+        async function renderPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            if (!postId) {
+                document.getElementById('post-content').innerHTML = '<p>Post not found.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/Debinno/bo3-mods-data/contents/posts/${postId}.json`);
+                const file = await response.json();
+                const content = JSON.parse(atob(file.content));
+
+                document.getElementById('post-title').textContent = content.title;
+                document.getElementById('post-author').textContent = `Posted by ${content.author}`;
+                document.getElementById('post-date').textContent = new Date(content.date).toLocaleString();
+                document.getElementById('post-body').innerHTML = content.content;
+
+                const currentUser = JSON.parse(localStorage.getItem('user'));
+                const postActions = document.getElementById('post-actions');
+                if (currentUser && currentUser.id === content.authorId) {
+                    postActions.style.display = 'block';
+                }
+
+                // Store postId in a global variable for edit and delete functions
+                window.currentPostId = postId;
+
+                // Show reply form for logged-in users
+                if (currentUser) {
+                    document.getElementById('reply-form').style.display = 'block';
+                }
+
+                // Render replies
+                await renderReplies(postId);
+            } catch (error) {
+                console.error('Error fetching post:', error);
+                document.getElementById('post-content').innerHTML = '<p>Error loading post.</p>';
+            }
+        }
+
+        async function handleReaction(event) {
+            const reaction = event.target.dataset.reaction;
+            const postId = new URLSearchParams(window.location.search).get('id');
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (!user) {
+                alert('You must be logged in to react to posts.');
+                return;
+            }
+
+            try {
+                await addReaction(postId, user.id, reaction);
+                updateReactionCounts(postId);
+            } catch (error) {
+                console.error('Error adding reaction:', error);
+                alert('Failed to add reaction. Please try again.');
+            }
+        }
+
+        function editPost(postId) {
+            window.location.href = `edit-post.html?id=${postId}`;
+        }
+
+        async function deletePost(postId) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                try {
+                    const success = await deleteForumPost(postId);
+                    if (success) {
+                        alert('Post deleted successfully!');
+                        window.location.href = 'forum.html';
+                    }
+                } catch (error) {
+                    console.error('Error deleting post:', error);
+                    alert('Failed to delete post. Please try again.');
+                }
+            }
+        }
+
+        async function renderReplies(postId) {
+            const repliesContainer = document.getElementById('replies');
+            repliesContainer.innerHTML = '<h3>Replies</h3>';
+
+            try {
+                const replies = await getReplies(postId);
+                replies.forEach(reply => {
+                    const replyElement = document.createElement('div');
+                    replyElement.className = 'reply';
+                    replyElement.innerHTML = `
+                        <div class="reply-meta">
+                            <span class="reply-author">${reply.author}</span>
+                            <span class="reply-date">${new Date(reply.date).toLocaleString()}</span>
+                        </div>
+                        <div class="reply-content">${reply.content}</div>
+                    `;
+                    repliesContainer.appendChild(replyElement);
+                });
+            } catch (error) {
+                console.error('Error fetching replies:', error);
+                repliesContainer.innerHTML += '<p>Error loading replies.</p>';
+            }
+        }
+
+        async function submitReply(postId) {
+            const replyContent = document.getElementById('reply-content').value;
+            if (!replyContent.trim()) {
+                alert('Please enter a reply before submitting.');
+                return;
+            }
+
+            try {
+                const success = await createReply(postId, replyContent);
+                if (success) {
+                    document.getElementById('reply-content').value = '';
+                    await renderReplies(postId);
+                }
+            } catch (error) {
+                console.error('Error submitting reply:', error);
+                alert('Failed to submit reply. Please try again.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderPost);
+    </script>
+</body>
+</html>
