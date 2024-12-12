@@ -1,0 +1,303 @@
+:root {
+    --main-color: #add8e6; /* Light blue */
+    /* Alternative options: */
+    /* --main-color: #e0e0e0; */ /* Whitish */
+    /* --main-color: #87ceeb; */ /* Sky blue */
+    --dim-color: #040;
+    --bg-color: #000;
+    --scanline-color: rgba(0, 255, 0, 0.07);
+    --glow: 0 0 2px var(--main-color);
+    --font: 'Share Tech Mono', monospace;
+}
+
+body, * {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAADtJREFUGJVjYICCsrKy/4xQNgMTAxJ4/fr1/1evXv1nZGRkgPOZGFAAE5FqGBkZmaC2wzUwMUAASi8A+x4LA4QGm/IAAAAASUVORK5CYII='), auto;
+}
+
+.menu-item:hover, a:hover, button:hover {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAE5JREFUGJWNkNEKACAIA+f//6OnCHT4EHQPwrc5ZwAiQkqJmYGZwczQWkNE7LHCzKjWOgjM7N4L59wrZEPOmZxzv4VLKYgIeu+w1q5gA2VjIQsqH+QdAAAAAElFTkSuQmCC'), pointer;
+}
+
+.boot-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--main-color);
+    padding: 2rem;
+    font-family: var(--font);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.boot-text {
+    margin-top: 2rem;
+    white-space: pre-line;
+}
+
+.boot-sequence.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+}
+
+.ascii-art {
+    animation: flicker 0.3s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+/* GUI Elements */
+.gui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 12px;
+}
+
+.gui-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 5px;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+.menu-bar {
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.menu-item:hover, .menu-item.active {
+    color: var(--bg-color);
+    background: var(--main-color);
+}
+
+.gui-sidebar {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    width: 150px;
+    font-size: 11px;
+    text-align: right;
+}
+
+.drive-info, .task-list {
+    margin-bottom: 10px;
+    padding: 2px;
+    border-left: 1px solid var(--main-color);
+}
+
+.gui-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 5px;
+    background: var(--bg-color);
+    border-top: 1px solid var(--main-color);
+}
+
+.clock {
+    animation: blink 1s step-end infinite;
+}
+
+.gui-stats {
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.gui-stats div {
+    margin: 2px 0;
+    padding: 2px 5px;
+    border-left: 1px solid var(--main-color);
+}
+
+.gui-meter {
+    display: inline-block;
+    width: 50px;
+    height: 8px;
+    border: 1px solid var(--main-color);
+    margin-left: 5px;
+}
+
+.gui-meter-fill {
+    height: 100%;
+    background: var(--main-color);
+    box-shadow: var(--glow);
+    animation: meterPulse 2s infinite;
+}
+
+@keyframes meterPulse {
+    0% { width: 85%; }
+    50% { width: 95%; }
+    100% { width: 85%; }
+}
+
+body {
+    margin: 0;
+    background: var(--bg-color);
+    font-family: var(--font);
+    line-height: 1.2;
+    overflow: hidden;
+    color: var(--main-color);
+}
+
+.terminal {
+    height: calc(100vh - 80px);
+    padding: 20px;
+    background: var(--bg-color);
+    position: relative;
+    overflow-y: auto;
+    font-family: var(--font);
+    color: var(--main-color);
+    text-shadow: var(--glow);
+    margin-top: 80px;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.terminal.visible {
+    opacity: 1;
+}
+
+/* Simple scanlines */
+.terminal::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        var(--scanline-color),
+        var(--scanline-color) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+}
+
+.terminal-output {
+    margin-bottom: 120px;
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.command-line {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    right: 20px;
+}
+
+.prompt {
+    color: var(--main-color);
+    margin-right: 8px;
+}
+
+.terminal-input {
+    background: transparent;
+    border: none;
+    color: var(--main-color);
+    font-family: var(--font);
+    font-size: 14px;
+    outline: none;
+    width: calc(100% - 120px);
+    text-shadow: var(--glow);
+}
+
+/* Simple blink animation */
+.prompt::after {
+    content: "█";
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.gui-menu {
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    cursor: pointer;
+    padding: 2px 5px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+}
+
+.menu-item.active {
+    border: 1px solid var(--main-color);
+    box-shadow: var(--glow);
+}
+
+.connection-status {
+    padding: 5px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.system-monitor {
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.monitor-item {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    padding: 5px 10px;
+    margin: 5px 0;
+}
+
+.command-response {
+    white-space: pre;
+    margin: 0;
+    padding: 0;
+}

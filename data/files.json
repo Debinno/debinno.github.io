@@ -1,0 +1,38 @@
+{
+    "ABOUT.TXT": {
+        "content": "Developer & Game Modder\n\nSpecializing in:\n- Web Development\n- BO3 Custom Zombies\n- Game Development\n\nType CONTACT for more info",
+        "size": 1024,
+        "date": "04-15-24",
+        "time": "14:30"
+    },
+    "PROJECTS.EXE": {
+        "content": "Current Projects:\n\n1. Custom Zombies Maps\n   - Der Schatten\n   - Facility Z\n\n2. Web Development\n   - Personal Website\n   - BO3 Mods Forum\n\n3. Game Development\n   - Upcoming Godot Project",
+        "size": 15360,
+        "date": "04-15-24",
+        "time": "14:30"
+    },
+    "SOCIALS.SYS": {
+        "content": "Social Media Links:\n\nYouTube:  @Debino_\nTwitter:  @xexdebino\nGitHub:   @Debinno\nDiscord:  Coming Soon",
+        "size": 2048,
+        "date": "04-15-24",
+        "time": "14:30"
+    },
+    "CONTACT.DAT": {
+        "content": "Contact Information:\n\nEmail: contact@debino.dev\nBusiness: business@debino.dev\nDiscord: Join server at discord.gg/debino",
+        "size": 1024,
+        "date": "04-15-24",
+        "time": "14:30"
+    },
+    "MATRIX.EXE": {
+        "content": "Initiating Matrix mode...\n\nWake up, Neo...\nFollow the white rabbit.\n\nKnock, knock.",
+        "size": 1337,
+        "date": "99-99-99",
+        "time": "23:59"
+    },
+    "COFFEE.EXE": {
+        "content": "☕ Coffee.exe is brewing...\n\nError: PC LOAD LETTER\nPlease insert coffee beans and try again.",
+        "size": 420,
+        "date": "04-20-24",
+        "time": "04:20"
+    }
+}

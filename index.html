@@ -3,36 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Debino's Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>DEBIN-OS v1.0.25</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-        }
-        a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Debino's Website</h1>
-        <a href="personal_site/index.html">Personal Site</a>
-        <a href="bo3_mods/index.html">BO3 Mods Forum</a>
+    <div class="gui-overlay">
+        <div class="gui-header">
+            <div class="menu-bar">
+                <span class="menu-item">[F1] Help</span>
+                <span class="menu-item">[F2] Files</span>
+                <span class="menu-item">[F3] Network</span>
+                <span class="menu-item active">[F4] Terminal</span>
+            </div>
+            <div class="system-info">
+                640K RAM  COM1  LPT1
+            </div>
+        </div>
+
+        <div class="gui-sidebar">
+            <div class="drive-info">
+                Drive C: 42MB
+                [||||||____] Free
+            </div>
+            <div class="task-list">
+                COMMAND.COM
+                TERMINAL.EXE *
+                NETWORK.SYS
+            </div>
+        </div>
+
+        <div class="gui-footer">
+            <span>C:\SYSTEM></span>
+            <span class="clock">00:00:00</span>
+        </div>
     </div>
+    <div class="boot-sequence">
+        <pre class="ascii-art">
+    ____  ________  ___  _   ______  ____  ____  _____ 
+   / __ \/ ____/  |/  / / | / / __ \/ __ \/ __ \/ ___/
+  / / / / __/ / /|_/ / /  |/ / / / / / / / / / /\__ \ 
+ / /_/ / /___/ /  / / / /|  / /_/ / /_/ / /_/ /___/ / 
+/_____/_____/_/  /_/_/_/ |_/\____/\____/\____//____/  
+        </pre>
+        <div class="boot-text"></div>
+    </div>
+    <div class="terminal hidden">
+        <div class="terminal-output"></div>
+        <div class="command-line">
+            <span class="prompt">C:\></span>
+            <input type="text" class="terminal-input" autofocus>
+        </div>
+    </div>
+    <script src="boot.js"></script>
+    <script src="terminal.js"></script>
+    <script src="audio.js"></script>
 </body>
 </html>
