@@ -1,50 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>About Me</title>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Debino</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="socials.html">Socials</a>
-                <a href="about.html" class="active">About</a>
-                <a href="../bo3_mods/index.html">BO3 Mods Forum</a>
+  <nav>
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="Debino Logo" class="logo-img">
+      Debino
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/about" class="active">About</a>
+    </div>
+  </nav>
+
+  <div class="about-hero">
+    <h1>About Me</h1>
+    <p class="subtitle">Software Developer & Content Creator</p>
+  </div>
+
+  <div class="main-content">
+    <div class="about-container">
+      <section class="about-intro">
+        <div class="team-info">
+          <img src="assets/images/debino_400x400.jpg" alt="Debino's Avatar">
+          <div class="team-details">
+            <h2>Debino</h2>
+            <p>Software Developer & Content Creator</p>
+            <div class="social-links">
+              <a href="https://github.com/Debinno" target="_blank" class="social-icon">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://x.com/xexdebino" target="_blank" class="social-icon">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="https://www.youtube.com/@Debino_" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+              </a>
             </div>
-        </nav>
-    </header>
-    <main class="home-content">
-        <section class="about-me">
-            <h2>About Me</h2>
-            <p>Hello! I'm a passionate developer with a love for creating new experiences. Whether it's crafting responsive websites, modding games, or building new games in Godot, I'm always excited to take on new challenges and push the boundaries of what's possible.</p>
-        </section>
-        <section class="skills">
-            <h2>Skills</h2>
-            <ul>
-                <li>Web Development (HTML, CSS, JavaScript)</li>
-                <li>Black Ops 3 Modding</li>
-                <li>Godot Game Development</li>
-                <li>UI/UX Design</li>
-            </ul>
-        </section>
-        <section class="recent-video">
-            <h2>My Latest Video</h2>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/6fluTnaUzHs?si=mLaXzJzDkkXw8F_g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><!-- Embed you  r latest video here -->
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Debino. All rights reserved.</p>
-    </footer>
-    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌓</button>
-    <button id="back-to-top" aria-label="Back to top">↑</button>
-    <script src="main.js"></script>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-features">
+        <div class="feature">
+          <i class="fas fa-code"></i>
+          <div>
+            <h2>Development</h2>
+            <p>Full-stack development with modern technologies</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <i class="fas fa-video"></i>
+          <div>
+            <h2>Content Creation</h2>
+            <p>YouTube tutorials and educational content</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <i class="fas fa-gamepad"></i>
+          <div>
+            <h2>Game Modding</h2>
+            <p>Experienced in game modification and development</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <p>© 2024 Debino | Software Developer</p>
+      <div class="social-links">
+        <a href="https://github.com/Debinno" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://x.com/xexdebino" target="_blank">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/@Debino_" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
-</html>
+</html> 
