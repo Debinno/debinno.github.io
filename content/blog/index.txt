@@ -1,2 +1,0 @@
-Getting Started with Game Modding::getting-started-with-game-modding.md
-My Development Setup for 2024::development-setup-2024.md
