@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-search]').forEach(input=>{const target=document.querySelector(input.dataset.search);input.addEventListener('input',()=>{const q=input.value.toLowerCase();document.querySelectorAll(target+' [data-item]').forEach(x=>x.hidden=q&&!x.textContent.toLowerCase().includes(q))})});
